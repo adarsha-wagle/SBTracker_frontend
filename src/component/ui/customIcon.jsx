@@ -1,5 +1,5 @@
 import L from "leaflet";
-import reactIcon from "../assets/reactIcon.png";
+import reactIcon from "../../assets/reactIcon.png";
 export const markerIcon = new L.Icon({
   iconUrl: reactIcon,
   iconRetinaUrl: reactIcon,
