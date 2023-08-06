@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  Polyline,
+} from "react-leaflet";
 import osm from "../../config/osm_provider";
 import { socket } from "../../config/socket";
 import "leaflet/dist/leaflet.css";
@@ -7,17 +13,20 @@ import { markerIcon } from "../ui/customIcon";
 import { Box, Typography } from "@mui/material";
 function Map() {
   const [busLocation, setBusLocation] = useState({});
+  const [busMovementPath, setBusMovementPath] = useState([]);
   const location = [27.676, 85.3046];
 
   useEffect(() => {
     socket.on("initialBusLocation", (data) => {
       console.log("initial data", data);
       setBusLocation(data);
+      setBusMovementPath((prev) => [...prev, [data.latitude, data.longitude]]);
     });
     socket.on("busLocationUpdated", (data) => {
       setBusLocation(data);
       console.log("updated data", data);
       console.log(busLocation);
+      setBusMovementPath((prev) => [...prev, [data.latitude, data.longitude]]);
     });
     return () => {
       socket.off("initialBusLocation");
@@ -53,14 +62,7 @@ function Map() {
             url={osm.maptiler.url}
             attribution={osm.maptiler.attribution}
           />
-          {/* {Object.keys(busLocation).map((busId) => {
-          const busPosition = busLocation[busId];
-          if (!busPosition || busPosition.length === 0) {
-            // Check if the busPosition is available and has valid latitude and longitude
-            return null;
-          }
 
-          return ( */}
           {busLocation.latitude && busLocation.longitude && (
             <Marker
               position={[busLocation.latitude, busLocation.longitude]}
@@ -68,6 +70,9 @@ function Map() {
             >
               <Popup>Bus ID: {busLocation.longitude}</Popup>
             </Marker>
+          )}
+          {busMovementPath.length > 1 && (
+            <Polyline positions={busMovementPath} color="blue" />
           )}
           {/* );
         })} */}

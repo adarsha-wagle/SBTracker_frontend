@@ -5,4 +5,5 @@ export const markerIcon = new L.Icon({
   iconRetinaUrl: reactIcon,
   popupAnchor: [-0, -0],
   iconSize: [20, 20],
+  className: "animate-marker",
 });
