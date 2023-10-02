@@ -9,11 +9,17 @@ import {
 } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 import HomePage from "./pages/home.pages";
+import RouteDetailsPage from "./pages/route_details.pages";
+import LoginPage from "./pages/login.pages";
+import AdminDashboardPage from "./pages/admin_dashboard.pages";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<HomePage />} />
       <Route path="map" element={<Map />} />
+      <Route path="route-details" element={<RouteDetailsPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/dashboard/admin" element={<AdminDashboardPage />} />
     </Route>
   )
 );

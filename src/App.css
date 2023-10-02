@@ -23,7 +23,7 @@ a {
     transform: rotate(360deg);
   }
 }
-
+*/
 .animate-marker {
   animation: rotate 2s linear infinite;
-} */
+}

@@ -8,14 +8,17 @@ function HomeThirdSection() {
       sx={{
         marginTop: "4rem",
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: { lg: "space-around", xs: "center" },
+        alignItems: "center",
+        flexDirection: { md: "row", xs: "column" },
+        padding: { xs: "0 1rem" },
       }}
     >
       <Box>
-        <img src={blueSchoolBus} alt="School Bus " />
+        <img src={blueSchoolBus} alt="School Bus " style={{ width: "100%" }} />
       </Box>
       <Box sx={{ position: "relative" }}>
-        <img src={blueBlob} alt="Vector" />
+        <img src={blueBlob} alt="Vector" style={{ width: "100%" }} />
         <Box
           sx={{
             position: "absolute",
