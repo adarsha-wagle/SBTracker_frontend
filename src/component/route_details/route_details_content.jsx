@@ -68,6 +68,73 @@ function RouteDetailContent() {
         })} */}
         </MapContainer>
       </div>
+      <Box sx={{ mt: "2rem" }}>
+        <Typography variant="h5">Bus Details : </Typography>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <Typography variant="body1" fontWeight="bold">
+                  Speed :{" "}
+                </Typography>
+              </td>
+              <td>
+                <Typography variant="body1">{busLocation.speed}</Typography>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Typography variant="body1" fontWeight="bold">
+                  Longitude :{" "}
+                </Typography>
+              </td>
+              <td>
+                <Typography variant="body1">{busLocation.longitude}</Typography>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Typography variant="body1" fontWeight="bold">
+                  Latitude :{" "}
+                </Typography>
+              </td>
+              <td>
+                <Typography variant="body1">{busLocation.latitude}</Typography>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Typography variant="body1" fontWeight="bold">
+                  Time :{" "}
+                </Typography>
+              </td>
+              <td>
+                <Typography variant="body1">{busLocation.time}</Typography>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Typography variant="body1" fontWeight="bold">
+                  Course :{" "}
+                </Typography>
+              </td>
+              <td>
+                <Typography variant="body1">{busLocation.course}</Typography>
+              </td>
+            </tr>{" "}
+            <tr>
+              <td>
+                <Typography variant="body1" fontWeight="bold">
+                  Altitude :{" "}
+                </Typography>
+              </td>
+              <td>
+                <Typography variant="body1">{busLocation.altitude}</Typography>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </Box>
     </Box>
   );
 }
