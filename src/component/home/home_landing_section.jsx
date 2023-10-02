@@ -8,11 +8,14 @@ function HomeLandingSection() {
       sx={{
         marginTop: "4rem",
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: { lg: "space-around", xs: "center" },
+        alignItems: "center",
+        flexDirection: { md: "row", xs: "column" },
+        padding: { xs: "0 1rem" },
       }}
     >
       <Box sx={{ position: "relative" }}>
-        <img src={Vector} alt="Vector" />
+        <img src={Vector} alt="Vector" style={{ width: "100%" }} />
         <Box
           sx={{
             position: "absolute",
@@ -24,14 +27,20 @@ function HomeLandingSection() {
           <Box>
             <Typography
               variant="h4"
-              sx={{ fontFamily: "Leckerli One, cursive", fontSize: "4rem" }}
+              sx={{
+                fontFamily: "Leckerli One, cursive",
+                fontSize: { lg: "4rem", xs: "2rem", sm: "3rem" },
+              }}
             >
               Introducing our School Bus Tracking System
             </Typography>
           </Box>
           <Box>
             <Typography
-              sx={{ fontFamily: "Caveat, cursive", fontSize: "2rem" }}
+              sx={{
+                fontFamily: "Caveat, cursive",
+                fontSize: { xl: "2rem", xs: "1rem", sm: "1.85rem" },
+              }}
             >
               Say goodbye to missed pickups and waiting in uncertainty.
             </Typography>
@@ -39,7 +48,7 @@ function HomeLandingSection() {
         </Box>
       </Box>
       <Box>
-        <img src={schoolBus} alt="School Bus " />
+        <img src={schoolBus} alt="School Bus" style={{ width: "100%" }} />
       </Box>
     </Box>
   );

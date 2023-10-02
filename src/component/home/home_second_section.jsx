@@ -23,7 +23,11 @@ function HomeSecondSection() {
       >
         <Typography
           variant="h4"
-          sx={{ fontFamily: "Leckerli One, cursive", textAlign: "center" }}
+          sx={{
+            fontFamily: "Leckerli One, cursive",
+            textAlign: "center",
+            fontSize: { md: "3rem", xs: "1.5rem", sm: "2rem" },
+          }}
         >
           Why Choose Our School Bus Tracking?
         </Typography>
@@ -32,7 +36,7 @@ function HomeSecondSection() {
             listStyleType: "disc",
             width: "60%",
             fontFamily: "Caveat, cursive",
-            fontSize: "1.5rem",
+            fontSize: { md: "1.5rem", xs: "1rem", sm: "1.25rem" },
           }}
         >
           <li>

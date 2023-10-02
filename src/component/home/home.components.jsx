@@ -8,7 +8,9 @@ function Home() {
   return (
     <Container disableGutters={true} maxWidth="false">
       <NavBar />
+
       <HomeLandingSection />
+
       <HomeSecondSection />
       <HomeThirdSection />
     </Container>
