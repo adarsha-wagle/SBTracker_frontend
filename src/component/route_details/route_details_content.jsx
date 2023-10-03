@@ -17,20 +17,14 @@ function RouteDetailContent() {
   const location = [27.676, 85.3046];
 
   useEffect(() => {
-    socket.on("initialBusLocation", (data) => {
-      console.log("initial data", data);
-      setBusLocation(data);
-      setBusMovementPath((prev) => [...prev, [data.latitude, data.longitude]]);
-    });
-    socket.on("busLocationUpdated", (data) => {
+    socket.on("currentLocation", (data) => {
       setBusLocation(data);
       console.log("updated data", data);
       console.log(busLocation);
       setBusMovementPath((prev) => [...prev, [data.latitude, data.longitude]]);
     });
     return () => {
-      socket.off("initialBusLocation");
-      socket.off("busLocationUpdated");
+      socket.off("currentLocation");
     };
   }, [busLocation]);
   return (
