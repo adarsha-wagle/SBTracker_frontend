@@ -29,8 +29,8 @@ const navItems = [
     link: "/about",
   },
   {
-    name: "Contact",
-    link: "/contact",
+    name: "Dashboard",
+    link: "/dashboard/admin",
   },
   {
     name: "Login",

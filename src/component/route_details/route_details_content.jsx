@@ -14,11 +14,13 @@ import { markerIcon } from "../ui/customIcon";
 import { Avatar, Box, Typography } from "@mui/material";
 import L from "leaflet";
 import motey from "../../assets/motey.png";
+import "./routes.css";
+import { BASE_URL } from "../../config/base_url";
 function RouteDetailContent() {
   const [busLocation, setBusLocation] = useState({});
   const [busMovementPath, setBusMovementPath] = useState([]);
   const studentList = useSelector((state) => state.route.studentList);
-  const location = [20.676, 85.3046];
+  const location = [27.683643626016703, 85.306630364214366];
 
   useEffect(() => {
     socket.on("currentLocation", (data) => {
@@ -52,7 +54,13 @@ function RouteDetailContent() {
           />
 
           {/* {busLocation.latitude && busLocation.longitude && ( */}
-          <Marker position={location} icon={markerIcon}>
+          <Marker
+            position={[
+              busLocation?.latitude || 27.683643626016703,
+              busLocation?.longitude || 85.306630364214366,
+            ]}
+            icon={markerIcon}
+          >
             <Popup>Bus ID: {557}</Popup>
           </Marker>
           {studentList?.map((student) => {
@@ -60,16 +68,22 @@ function RouteDetailContent() {
               <Marker
                 key={student?._id}
                 position={[
-                  student?.studentPickUp?.pickUpLocation?.coordinates?.latitude,
                   student?.studentPickUp?.pickUpLocation?.coordinates
-                    ?.longitude,
+                    ?.latitude || 27.683643626016703,
+                  student?.studentPickUp?.pickUpLocation?.coordinates
+                    ?.longitude || 85.306630364214366,
                 ]}
                 icon={
                   new L.icon({
-                    iconUrl: student?.image ? student?.image : motey,
-                    iconRetinaUrl: student?.image ? student?.image : motey,
+                    iconUrl: student?.image
+                      ? `${BASE_URL}/${student?.image}`
+                      : motey,
+                    iconRetinaUrl: student?.image
+                      ? `${BASE_URL}/${student?.image}`
+                      : motey,
                     popupAnchor: [-0, -0],
-                    iconSize: [20, 20],
+                    iconSize: [40, 40],
+                    className: "rounded-icon",
                   })
                 }
               >
@@ -100,7 +114,7 @@ function RouteDetailContent() {
             <tr>
               <td>
                 <Typography variant="body1" fontWeight="bold">
-                  Speed :{" "}
+                  Speed :
                 </Typography>
               </td>
               <td>
@@ -110,7 +124,7 @@ function RouteDetailContent() {
             <tr>
               <td>
                 <Typography variant="body1" fontWeight="bold">
-                  Longitude :{" "}
+                  Longitude :
                 </Typography>
               </td>
               <td>
@@ -120,7 +134,7 @@ function RouteDetailContent() {
             <tr>
               <td>
                 <Typography variant="body1" fontWeight="bold">
-                  Latitude :{" "}
+                  Latitude :
                 </Typography>
               </td>
               <td>
@@ -130,7 +144,7 @@ function RouteDetailContent() {
             <tr>
               <td>
                 <Typography variant="body1" fontWeight="bold">
-                  Time :{" "}
+                  Time :
                 </Typography>
               </td>
               <td>
@@ -140,17 +154,17 @@ function RouteDetailContent() {
             <tr>
               <td>
                 <Typography variant="body1" fontWeight="bold">
-                  Course :{" "}
+                  Course :
                 </Typography>
               </td>
               <td>
                 <Typography variant="body1">{busLocation.course}</Typography>
               </td>
-            </tr>{" "}
+            </tr>
             <tr>
               <td>
                 <Typography variant="body1" fontWeight="bold">
-                  Altitude :{" "}
+                  Altitude :
                 </Typography>
               </td>
               <td>

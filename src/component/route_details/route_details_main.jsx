@@ -3,6 +3,7 @@ import RouteDetailContent from "./route_details_content";
 import { useDispatch } from "react-redux";
 
 import { fetchStudentListAsync } from "../../redux/routeSlice";
+import NavBar from "../nav_bar/nav_bar";
 function RouteDetailsMain() {
   const dispatch = useDispatch();
 
@@ -11,6 +12,7 @@ function RouteDetailsMain() {
   }, [dispatch]);
   return (
     <div>
+      <NavBar />
       <RouteDetailContent />
     </div>
   );
