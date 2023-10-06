@@ -36,7 +36,7 @@ function HomeSecondSection() {
             listStyleType: "disc",
             width: "60%",
             fontFamily: "Caveat, cursive",
-            fontSize: { md: "1.5rem", xs: "1rem", sm: "1.25rem" },
+            fontSize: "1.25rem",
           }}
         >
           <li>

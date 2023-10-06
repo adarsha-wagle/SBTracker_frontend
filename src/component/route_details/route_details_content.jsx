@@ -6,14 +6,19 @@ import {
   TileLayer,
   Polyline,
 } from "react-leaflet";
+import { useSelector } from "react-redux";
 import osm from "../../config/osm_provider";
 import { socket } from "../../config/socket";
 import "leaflet/dist/leaflet.css";
 import { markerIcon } from "../ui/customIcon";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
+import motey from "../../assets/motey.png";
 function RouteDetailContent() {
   const [busLocation, setBusLocation] = useState({});
   const [busMovementPath, setBusMovementPath] = useState([]);
+  const studentDetailsList = useSelector(
+    (state) => state.route.studentDetailsList
+  );
   const location = [27.676, 85.3046];
 
   useEffect(() => {
@@ -47,14 +52,27 @@ function RouteDetailContent() {
             attribution={osm.maptiler.attribution}
           />
 
-          {busLocation.latitude && busLocation.longitude && (
-            <Marker
-              position={[busLocation.latitude, busLocation.longitude]}
-              icon={markerIcon}
-            >
-              <Popup>Bus ID: {busLocation.longitude}</Popup>
-            </Marker>
-          )}
+          {/* {busLocation.latitude && busLocation.longitude && ( */}
+          <Marker position={location} icon={markerIcon}>
+            <Popup>Bus ID: {busLocation.longitude}</Popup>
+          </Marker>
+          {studentDetailsList?.map((student) => {
+            return (
+              <Marker
+                key={student?._id}
+                position={[student?.latitude, student?.longitude]}
+                icon={markerIcon}
+              >
+                <Popup>
+                  <Avatar sx={{ width: "2rem", height: "2rem" }} src={motey} />
+                  <Typography variant="body1">
+                    {student?.firstName} {student?.lastName}
+                  </Typography>
+                </Popup>
+              </Marker>
+            );
+          })}
+          {/* )} */}
           {busMovementPath.length > 1 && (
             <Polyline positions={busMovementPath} color="blue" />
           )}

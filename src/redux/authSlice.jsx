@@ -10,11 +10,18 @@ const initialState = {
 
 export const registerParent = createAsyncThunk(
   "auth/registerParent",
-  async ({ data }, { rejectWithValue }) => {
+  async ({ formData }, { rejectWithValue }) => {
+    console.log("register parent data", formData);
+    formData.forEach((entries) => console.log(entries));
+
     try {
-      const response = await axios.post(`${BASE_URL}/register`, data, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${BASE_URL}/school/student/register`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       if (response.status === 200) {
         toast.success("Welcome Admin!", {
           position: "top-right",
@@ -50,9 +57,13 @@ export const loginAdmin = createAsyncThunk(
   "auth/loginAdmin",
   async ({ data }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${BASE_URL}/login`, data, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${BASE_URL}/school/admin/register`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
       if (response.status === 200) {
         toast.success("Welcome Admin!", {
           position: "top-right",

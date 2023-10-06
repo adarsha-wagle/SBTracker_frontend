@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import NavBar from "../component/nav_bar/nav_bar";
+import { useDispatch } from "react-redux";
+import { loginAdmin } from "../redux/authSlice";
 
 function Copyright(props) {
   return (
@@ -31,18 +33,17 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 export default function SignIn() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPasssword] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const data = {
+      email,
+      password,
+    };
+    dispatch(loginAdmin({ data }));
   };
 
   return (
