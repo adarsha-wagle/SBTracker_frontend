@@ -23,7 +23,7 @@ export const registerParent = createAsyncThunk(
         }
       );
       if (response.status === 200) {
-        toast.success("Welcome Admin!", {
+        toast.success("Registration Success!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

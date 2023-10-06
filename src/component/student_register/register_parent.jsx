@@ -11,6 +11,7 @@ import {
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ChooseMap from "./choose_map_location";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { registerParent } from "../../redux/authSlice";
 function AdminDashboard({ setOpenParentDialog }) {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function AdminDashboard({ setOpenParentDialog }) {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
+  const [areaName, setAreaName] = useState("");
 
   const selectedMap = useSelector((state) => state.location.selectedMap);
 
@@ -46,6 +48,18 @@ function AdminDashboard({ setOpenParentDialog }) {
   };
   const handleParentRegister = (e) => {
     e.preventDefault();
+    if (!selectedMap || !image) {
+      return toast.error("Please select a location and upload an image", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
     const formData = new FormData();
     const parentData = {
       name: parentName,
@@ -58,6 +72,7 @@ function AdminDashboard({ setOpenParentDialog }) {
     const studentData = {
       name: studentName,
       class: studentClass,
+      areaName: areaName,
       longitude: location.lng,
       latitude: location.lat,
     };
@@ -180,11 +195,21 @@ function AdminDashboard({ setOpenParentDialog }) {
                 margin="normal"
                 required
                 fullWidth
-                label="Name"
+                label="Parent name"
                 autoComplete="off"
                 autoFocus
                 value={parentName}
                 onChange={(e) => setParentName(e.target.value)}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                label="Pick up area name"
+                autoComplete="off"
+                autoFocus
+                value={areaName}
+                onChange={(e) => setAreaName(e.target.value)}
               />
               <TextField
                 margin="normal"

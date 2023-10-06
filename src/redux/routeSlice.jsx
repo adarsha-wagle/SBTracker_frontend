@@ -3,7 +3,7 @@ import { BASE_URL } from "../config/base_url";
 
 const initialState = {
   selectedMap: null,
-  studentDetails: null,
+  studentList: [],
   isLoading: false,
   error: null,
 };
@@ -34,7 +34,7 @@ const routeSlice = createSlice({
       })
       .addCase(fetchStudentListAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.studentDetails = action.payload;
+        state.studentList = action.payload;
       })
       .addCase(fetchStudentListAsync.rejected, (state, action) => {
         state.isLoading = false;
