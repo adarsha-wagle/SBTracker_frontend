@@ -12,14 +12,13 @@ import { socket } from "../../config/socket";
 import "leaflet/dist/leaflet.css";
 import { markerIcon } from "../ui/customIcon";
 import { Avatar, Box, Typography } from "@mui/material";
+import L from "leaflet";
 import motey from "../../assets/motey.png";
 function RouteDetailContent() {
   const [busLocation, setBusLocation] = useState({});
   const [busMovementPath, setBusMovementPath] = useState([]);
-  const studentDetailsList = useSelector(
-    (state) => state.route.studentDetailsList
-  );
-  const location = [27.676, 85.3046];
+  const studentList = useSelector((state) => state.route.studentList);
+  const location = [20.676, 85.3046];
 
   useEffect(() => {
     socket.on("currentLocation", (data) => {
@@ -54,19 +53,33 @@ function RouteDetailContent() {
 
           {/* {busLocation.latitude && busLocation.longitude && ( */}
           <Marker position={location} icon={markerIcon}>
-            <Popup>Bus ID: {busLocation.longitude}</Popup>
+            <Popup>Bus ID: {557}</Popup>
           </Marker>
-          {studentDetailsList?.map((student) => {
+          {studentList?.map((student) => {
             return (
               <Marker
                 key={student?._id}
-                position={[student?.latitude, student?.longitude]}
-                icon={markerIcon}
+                position={[
+                  student?.studentPickUp?.pickUpLocation?.coordinates?.latitude,
+                  student?.studentPickUp?.pickUpLocation?.coordinates
+                    ?.longitude,
+                ]}
+                icon={
+                  new L.icon({
+                    iconUrl: student?.image ? student?.image : motey,
+                    iconRetinaUrl: student?.image ? student?.image : motey,
+                    popupAnchor: [-0, -0],
+                    iconSize: [20, 20],
+                  })
+                }
               >
                 <Popup>
-                  <Avatar sx={{ width: "2rem", height: "2rem" }} src={motey} />
+                  <Avatar
+                    sx={{ width: "2rem", height: "2rem" }}
+                    src={student?.image}
+                  />
                   <Typography variant="body1">
-                    {student?.firstName} {student?.lastName}
+                    {student?.name} {student?.studentClass}
                   </Typography>
                 </Popup>
               </Marker>

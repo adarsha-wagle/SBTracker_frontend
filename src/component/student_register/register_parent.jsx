@@ -77,8 +77,8 @@ function AdminDashboard({ setOpenParentDialog }) {
       latitude: location.lat,
     };
 
-    formData.append("parentData", JSON.stringify(parentData));
-    formData.append("studentData", JSON.stringify(studentData));
+    formData.append("parent", JSON.stringify(parentData));
+    formData.append("student", JSON.stringify(studentData));
     formData.append("image", image);
 
     dispatch(registerParent({ formData })).then((action) => {
